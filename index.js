@@ -7,7 +7,8 @@ import SequelizeStore from 'connect-session-sequelize'
 import UserRoute from './routes/UserRoute.js';
 import ComponentRoute from './routes/ComponentRoute.js'
 import AuthRoute from './routes/AutenticationRoute.js'
-
+import ClassComponentRoute from './routes/ClassComponentRoute.js'
+import Subclass from "./routes/SubclassRoute.js"
 dotenv.config();
 
 const app = express();
@@ -16,11 +17,12 @@ const sessionStore = SequelizeStore(session.Store);
 
 const store = new sessionStore ({
     db:db
-})
-// INICIALIZAR LA BD
-// (async () => {
-//     await db.sync();
-// })();
+});
+//INICIALIZAR LA BD
+
+(async () => {
+    await db.sync();
+})();
 
 app.use(session({
     secret: process.env.SECRET,
@@ -41,6 +43,9 @@ app.use(express.json());
 app.use(UserRoute);
 app.use(ComponentRoute);
 app.use(AuthRoute);
+app.use(ClassComponentRoute);
+app.use(Subclass);
+
 
 //store.sync();
 

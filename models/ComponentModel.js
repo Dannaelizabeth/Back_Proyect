@@ -56,7 +56,7 @@ const Components = db.define('component', {
     freezeTableName:true
 });
 
-
+//R
 Users.hasMany(Components);
 Components.belongsTo(Users,{foreignKey:'userId'});
 
